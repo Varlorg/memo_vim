@@ -1,0 +1,371 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage[french]{babel}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{geometry}
+\geometry{hmargin=2.5cm,vmargin=2cm}
+
+\title{Raccourcis Vim}
+\author{Adrian Poiget}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Ce document contient une liste non exhaustive des différents raccourcis sur VIM.
+J'espère qu'elle pourra vous être utile.\\
+Les raccourcis seront représenté comme dans le tableau suivant~: 
+\begin{tabular}{|p{3cm}| l|  }
+\hline
+Raccourcis & Action\\ \hline
+\end{tabular}\\
+Pour les raccourcis, la casse est importante : les lettres en majuscule sont l'équivalent de la combinaison Maj-lettre. Par exemple, V correspond à Maj-v et v correspond uniquement à la touche v.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Se déplacer}
+\subsection{Déplacement de base}
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	h & Aller à gauche \\ \hline
+	j & Aller en bas \\ \hline
+	k & Aller en haut \\ \hline
+	l & Aller à droite \\ \hline
+\end{tabular}
+ou alors on peut aussi utiliser les flèches.
+
+\subsection{Déplacement par mots}
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	w & Aller au début du mot suivant\\ \hline
+	W & Aller au début du MOT suivant\\ \hline
+	e & Aller à la fin du mot suivant\\ \hline
+	E & Aller à la fin du MOT suivant\\ \hline
+	b & Aller au début du mot précédent\\ \hline
+	B & Aller au début du MOT précédent\\ \hline
+    ge & Aller à la fin du mot précédent\\ \hline
+	gE & Aller à la fin du MOT précédent\\ \hline
+\end{tabular}\\
+
+mot vs MOT : mot est une chaine de lettres, chiffres et underscores, MOT est une chaine de caractères sans espace\\
+
+\subsection{Déplacement dans le fichier}
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	0 (zero) & Aller au début de la ligne \\ \hline
+	\$ & Aller à la fin de la ligne \\ \hline
+	\^~(accent circonflexe) & Aller au premier caratère non vide de la ligne \\ \hline
+	g\_  & Aller au dernier  caratère non vide de la ligne \\ \hline
+	+ & Aller au premier caractère non blanc de la ligne suivante \\ \hline
+	- & Aller au premier caractère non blanc de la ligne précédente \\ \hline
+	"Entrée" & Aller au premier caractère non blanc de la ligne suivante\\ \hline
+	:0 & Aller au début du fichier (ligne 0) \\ \hline
+	gg & Aller au début du fichier (ligne 0) \\ \hline
+	1G & Aller au début du fichier (ligne 0) \\ \hline
+	:\$ & Aller à la fin du fichier\\ \hline 
+	G  & Aller à la fin du fichier\\ \hline
+	CTRL-d & Aller à la fin du fichier\\ \hline
+	:n  & Aller à la ligne n\\ \hline
+	nG  & Aller à la ligne n\\ \hline
+	ngg & Aller à la ligne n\\ \hline
+\end{tabular}\\[0.5cm]
+
+
+
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+  50\% & Aller à 50\% du fichier.(milieu du fichier) \\ \hline
+  100l & Aller au 100ème caractere depuis la position acutelle \\ \hline
+  100  (100 suivi d'un espace) & Aller au 100ème caractere depuis la position acutelle \\ \hline
+  25| & Aller au 25ème caractère de la ligne en cours\\ \hline
+  :goto 25 & Aller au 25ème caractère depuis le début du fichier\\ \hline
+\end{tabular}\\
+
+
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	fx & Déplace le curseur à la prochaine occurence du caractère x \\ \hline
+	Fx & Déplace le curseur à la précédente occurence du caractère x \\ \hline
+	tx & Déplace le curseur juste avant la prochaine occurence du caractère x \\ \hline
+	Tx & Déplace le curseur juste avant la précédente occurence du caractère x \\ \hline
+\end{tabular}\\
+
+Pour ce déplacer à l'occurence suivante, il suffit d'appuyer sur ; et pour aller à l'occurrence  précédente c'est le raccourcis ,
+    
+\begin{tabular}{l l}
+Exemple&	4fx  recherche la 4ième occurrence de x.\\
+	&dt"  supprime tout jusqu'au prochain ".\\
+	&2dfx  supprime tout jusqu'à la 2eme prochaine occurence de  x.\\
+\end{tabular}\\
+
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	CTRL-n & Descendre le curseur d'une ligne \\ \hline
+	CTRL-p & Monter le curseur d'une ligne\\ \hline
+	CTRL-f & Descendre le curseur d'une page\\ \hline
+	CTRL-b & Monter le curseur d'une page\\ \hline
+	CTRL-d & Descendre le curseur d'une demi-page\\ \hline
+	CTRL-u & Monter le curseur d'une demi-page\\ \hline
+	CTRL-e & Descendre l'affichage d'une ligne\\ \hline
+	CTRL-y & Monter l'affichage d'une ligne\\ \hline
+	L & Aller au bas de l'écran\\ \hline
+	xL  & Placer le curseur à x lignes du bas de l'écran \\ \hline
+	H & Aller en haut de l'écran \\ \hline
+	xH & Placer le curseur à x lignes du haut de l'écran \\ \hline
+	M & Aller au milieu de l'écran\\ \hline
+\end{tabular}\\
+\subsection{Déplacement sur une ligne de "plusieurs lignes" visuellement }
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+gj & Descendre d'une "ligne"\\ \hline
+gk & Monter d'une "ligne"\\ \hline
+g0 & Aller au début de la "ligne"\\ \hline
+gm & Aller au milieu de la "ligne"\\ \hline
+g\$ & Aller à la fin de la "ligne"\\ \hline
+g\^~ & Aller au premier caratère non vide  de la ligne\\ \hline
+\end{tabular}\\
+
+\subsection{Sauts}
+Lorsquen vous vous déplacer dans le fichier grâce aux raccourcis précédents, vous pouvez revenir à la position d'avant avec les raccourcis suivavnts~: \\
+
+
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+CTRL-o & Revenir à l'emplacement précédent\\ \hline
+CTRL-i ou tab & Aller à l'emplacement suivant\\ \hline
+5CTRL-o & Sauter au 5ème emplacement précédent\\ \hline
+5CTRL-i & Sauter au 5ème emplacement suivant\\ \hline
+:jumps & Afficher les postions de jumps\\ \hline
+\end{tabular}\\
+
+\section{Rechercher}  
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+/chaine & Recherche le mot vers le bas\\ \hline
+?chaine & Recherche le mot vers le haut\\ \hline
+\end{tabular}\\
+
+\noindent
+Aller à la prochaine occurence de la chaine dans la même direction en tapant n.\\
+Aller à la prochaine occurence de la chaine dans la même direction en tapant N
+
+\section{Information}
+Voici maintenant quelques commandes pour obtenir des informations sur la ligne ou le caractère\\
+
+
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	:= & Affiche le nombre de ligne\\ \hline
+	CTRL-g & Affiche des informations sur le ligne en cours\\ \hline
+	g CTRL-g & Affiche des informations détaillées sur le ligne en cours\\ \hline
+	:.=  & Affiche le numero de la ligne en cours\\ \hline
+	:\#   & Affiche le numero de la ligne en cours\\ \hline
+	:num & Affiche le numero de la ligne en cours\\ \hline
+	:/foo/= & Affiche le numero de la prochaine ligne contenant foo\\ \hline
+	ga & Affiche la valeur ASCII du caractère\\ \hline
+\end{tabular}\\
+
+\section{Insertion/Edition}
+\subsection{Insertion}
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	i & Passer en mode insertion avant le curseur\\ \hline
+	I & Passer en mode insertion au début de la ligne\\ \hline
+	a & Passer en mode insertion après le curseur\\ \hline
+	A & Passer en mode insertion à la fin de la ligne\\ \hline
+	o & Ajouter une ligne en dessous et passer en mode insertion \\ \hline
+	O & Ajouter une ligne au dessus et passer en mode insertion \\ \hline
+\end{tabular}\\
+\subsection{Edition}
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	r & Remplacer un caractère (5ra remplace les 5 caractère par a)\\ \hline
+	R & Remplacer plusieurs caractères\\ \hline
+	cw & Effacer le mot et passer en mode insertion (changement)\\ \hline
+	cc ou S & Effacer la ligne entière et passer en mode insertion (changement)\\ \hline
+	c\$ ou C & Effacer jusqu'à la fin de la ligne et passer en mode insertion (changement)\\ \hline
+	cl ou s  & Effacer le caractère et passer en mode insertion \\ \hline
+	xp & transposer deux caractères\\ \hline
+	J & joindre 2 lignes (nJ pour joindre n lignes)\\ \hline
+	gJ  &joindre 2 lignes sans l'espace\\ \hline
+\end{tabular}\\
+
+	select all lines ggVG or ggHG (gggHG ?)
+	gf go to the file named by the word
+	u undo
+	U undo on the current line
+	Ctrl-r redo
+    
+\subsection{Suppression}
+\begin{tabular}{|p{3cm}| l|  }\hline
+x ou dl & supprimer le caractère sous le curseur (4x en supprime 4)\\ \hline
+X ou dh & supprimer le caractère placé avant le curseur\\ \hline
+dd ou :.d & supprimer la ligne entière (3dd poursupprimer 3 lignes)\\ \hline
+dw & supprimer la fin du mot (d4w delete 4 words)\\ \hline
+de & supprimer la fin du mot mais pas l'espace de fin \\ \hline
+db & supprimer le début du mot mais pas l'espace de fin\\ \hline
+dge & supprimer le début du mot et l'espace de début\\ \hline
+d\$ or D & supprimer jusqu'à la fin de la ligne\\ \hline
+d0 & supprimer le début de la ligne\\ \hline
+diw & supprimer le mot (excluant l'espace)\\ \hline
+daw & supprimer le mot (incluant l'espace)\\ \hline
+dG & supprimer la fin du fichier\\ \hline
+dgg & supprimer le début du fichier\\ \hline
+\end{tabular}\\
+
+
+\subsection{Changer la casse}
+\begin{tabular}{|p{3cm}| l|  }\hline
+    $\sim$ & Changer la casse d'une lettre \\ \hline
+	guu ou Vu& Toute la ligne est mise en minuscule\\ \hline
+	gUU ou VU & Toute la ligne est mise en majuscule\\ \hline
+	g$\sim$$\sim$ or g$\sim$g$\sim$ & Inverser la casse de la ligne\\ \hline
+	vEU & Mettre le mot en majuscule \\ \hline
+	vEu & Mettre le mot en minuscule\\ \hline
+	vE$\sim$ & Inverser la casse du mot\\ \hline
+	ggguG & Tout le fichier est mis en minuscule\\ \hline
+	gggUG & Tout le fichier est mis en majuscule\\ \hline
+	<selection>U & La sélection est mise en majuscule) \\ \hline
+	<selection>u & La sélection est mise en minuscule \\ \hline
+	g$\sim$motion & (It does not depend on tildeop) \\ \hline
+	gUmotion & (All uppercase) \\ \hline
+	gumotion & (All uppercase) \\ \hline
+	gUw & Mettre le mot en majuscule\\ \hline
+	guw & Mettre le mot en minuscule \\ \hline
+	g$\sim$w & Inverser la casse du mot \\ \hline
+    :\%s/\textbackslash{}\textless{}./\textbackslash{}u\&/g & Mettre la 1ère lettre de chaque mot en majuscule \\ \hline
+    :\%s/\textbackslash{}\textless{}./\textbackslash{}l\&/g & Mettre la 1ère lettre de chaque mot en minuscule \\ \hline
+    :\%s/.*/\textbackslash{}u\& &	Mettre la 1ère lettre de chaque ligne en majuscule\\ \hline
+    :\%s/.*/\textbackslash{}l\& &	Mettre la 1ère lettre de chaque ligne en minuscule\\ \hline
+\end{tabular}\\
+	:set ignorecase 	Ignore case in searches\\
+	:set smartcase 	Ignore case in searches excepted if an uppercase letter is used
+
+\section{Ouvrir, sauvegarder et quitter}
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	ZZ or :wq or :x & Sauvegarder le fichier et quitter\\ \hline
+	ZQ or :q! & Quitter sans sauver\\ \hline
+	:w [nomfichier]& Sauvegarde dans nomfichier \\ \hline
+	:n,mw foo & Sauvegarde les ligne n à m dans 'foo' \\ \hline
+	:w \textgreater \textgreater  foo & Ajoute le fichier courant au fichier ' foo'\\ \hline
+	:e ou :edit & Ouvrir un fichier (éditer) \\ \hline
+	:saveas  foo & Pareil que :w foo \\ \hline
+	:wq! & Sauvegarde lorsqu'un fichier a été ouvert en lecture seule (vim -R file)\\ \hline
+	:Sex & Ouvrir un exploreur de fichier  dans un nouveau split\\ \hline
+	:Ex & Ouvrir un exploreur de fichier\\ \hline
+	:browse e 	& Ouvre un exploreur de fichier graphique\\ \hline
+\end{tabular}\\
+	
+	:ls 	List buffers
+	:cd .. 	Move to parent directory
+	:args 	List files
+	:args *.php 	Open file list
+	:grep expression *.php 	Returns a list of .php files contening expression
+	gf 	Open file name under cursor
+\subsection{Les onglets}
+	vim -p file1 file2 ouvrir chaque fichier dans un onglet
+	:tabe  ou :tabedit {file}   ouvrir un fichier (éditer) dans un nouvel onglet
+	:tabnew 		ouvrir un nouvel onglet vide
+	:tabfind {file}   open a new tab with filename given, searching the 'path' to find it
+	:tabclose         close current tab
+	:tabclose {i}     close i-th tab
+	:tabonly          close all other tabs (show only the current tab)
+	:n	Go to next file
+	:p	Go to previous file
+
+\section{Marqueurs}
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+mx & Add a marker to the character x\\ \hline
+	`x & Jump to marker x\\ \hline
+	'x & Jump to the first non-blank character on the line with marker\\ \hline
+\end{tabular}\\
+
+\section{Complétion}
+Les commandes suivantes se font en mode insertion\\
+
+
+\begin{tabular}{|p{3cm}| l|  }
+    \hline
+CTRL-P & Recherche pour completion du mot dans le texte avant le curseur \\ \hline
+CTRL-N & Recherche pour completion dans mot le texte après le curseur \\ \hline 
+CTRL+x CTRL+l &	Recherche pour completion de la ligne \\ \hline
+\end{tabular}\\
+
+
+\section{Les splits} 
+\subsection{Ouverture}
+\begin{tabular}{|p{3cm}| l|  }\hline
+\multicolumn{2}{|l|}{\textbf{Lors du lancement de vim }} \\ \hline
+    vim -o foo bar & Ouvre foo et bar en split\\ \hline
+    vim -O foo bar & Ouvre foo et bar en vsplit\\ \hline
+\multicolumn{2}{|l|}{\textbf{Depuis vim}}\\ \hline
+	:sp tux ou :split tux & Ouvrir le fichier tux dans un split horizontal	\\ \hline
+    :vsp tux ou :vsplit tux & Ouvrir le fichier tux dans un split vertical	\\ \hline
+    :sview tux & Pareil que :sp mais en lecture seule \\ \hline
+\multicolumn{2}{|l|}{\textbf{Ouvrir de nouveaux splits }} \\ \hline
+	CTRL-w s & Partager l'écran en deux horizontalement	\\ \hline
+    CTRL-w v & Partager l'écran en deux verticalement	\\ \hline
+\end{tabular}\\
+
+\subsection{Déplacement}
+
+\begin{tabular}{|p{3cm}| l|  }\hline
+CTRL-w j & sélectionne le split d'en bas\\ \hline
+CTRL-w k & sélectionne le split d'en haut\\ \hline
+CTRL-w h & sélectionne le vsplit de gauche\\ \hline
+CTRL-w l & sélectionne le vsplit de droite\\ \hline
+\end{tabular}\\
+
+\noindent
+ CTRL-w fleche fonctionne aussi pour se déplacer. Si vous n'avez que deux splits, CTRL-w w vous permettra de basculer de l'un à l'autre.
+\subsection{Arrangement}
+
+\begin{tabular}{|p{3cm}| l|  }\hline
+\multicolumn{2}{|l|}{\textbf{Splits horizontals}} \\ \hline
+    CTRL-w + & Agrandir le split actif d'une ligne\\ \hline
+    CTRL-w - & Réduirele split actif d'une ligne\\ \hline
+    CTRL-w \_ & Maximise la taille du split\\ \hline
+\multicolumn{2}{|l|}{\textbf{Splits vertivals}}\\ \hline
+    CTRL-w > & Agrandir le split actif d'une colonne \\ \hline
+    CTRL-w < & Réduire le split actif d'une colonne \\ \hline
+    CTRL-w | & Maximise la taille du split\\ \hline
+\end{tabular}\\[1.5em]
+
+
+\begin{tabular}{|p{3cm}| l|  }\hline
+    CTRL-w = & Égalise la taille des splits \\ \hline
+    CTRL-r r & Échange la position des splits\\
+    & Fonctionne aussi avec "R" majuscule pour échanger en sens inverse \\ \hline
+    CTRL-w q & Fermer le split courant \\ \hline
+    CTRL-w o & Fermer tous les splits saut le split courant \\ \hline
+\end{tabular}\\
+
+
+\section{Indentation}
+\begin{tabular}{|p{3cm}| l|  }
+	\hline
+	== & autoindentation d'une ligne\\ \hline
+	= & auto-indentation d'un bloc\\ \hline
+	V{deplacement}= & pour réindenter la sélection\\ \hline
+	=i\{ & pour réindenter l'intérieur du bloc d'accolades courant\\ \hline
+	=a\{, & les lignes avec les accolades aussi\\ \hline
+	=ap & pour réindenter le paragraphe courant\\ \hline
+	< & indenter à gauche\\ \hline
+	> & indenter à droite\\ \hline
+\end{tabular}\\
+
+\section{Divers}
+\begin{tabular}{|p{4cm}| l|  }
+	\hline
+	:ab test test@foo.info 	& l'abbréviaton test sera remplacé par test@foo.info \\ \hline
+    CTRL-a &sur un nombre Ajoute 1 au nombre\\ \hline
+    CTRL-x &sur un nombre Enleve 1 au nombre\\ \hline
+\end{tabular}\\
+
+\end{document}
