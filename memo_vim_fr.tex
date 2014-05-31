@@ -200,23 +200,50 @@ Voici maintenant quelques commandes pour obtenir des informations sur la ligne o
 	U undo on the current line
 	Ctrl-r redo
     
-\subsection{Suppression}
+\subsection{Suppression (couper)}
 \begin{tabular}{|p{3cm}| l|  }\hline
 x ou dl & supprimer le caractère sous le curseur (4x en supprime 4)\\ \hline
 X ou dh & supprimer le caractère placé avant le curseur\\ \hline
 dd ou :.d & supprimer la ligne entière (3dd poursupprimer 3 lignes)\\ \hline
 dw & supprimer la fin du mot (d4w delete 4 words)\\ \hline
 de & supprimer la fin du mot mais pas l'espace de fin \\ \hline
-db & supprimer le début du mot mais pas l'espace de fin\\ \hline
+db & supprimer le début du mot mais pas l'espace de début\\ \hline
 dge & supprimer le début du mot et l'espace de début\\ \hline
 d\$ or D & supprimer jusqu'à la fin de la ligne\\ \hline
 d0 & supprimer le début de la ligne\\ \hline
-diw & supprimer le mot (excluant l'espace)\\ \hline
-daw & supprimer le mot (incluant l'espace)\\ \hline
+diw & supprimer le mot (excluant l'espace de fin)\\ \hline
+daw & supprimer le mot (incluant l'espace de fin)\\ \hline
 dG & supprimer la fin du fichier\\ \hline
 dgg & supprimer le début du fichier\\ \hline
 \end{tabular}\\
 
+
+\subsection{Copier}
+Pareil que pour les commandes pour supprimer en remplaçant d par y\\
+
+
+\begin{tabular}{|p{3cm}| l|  }\hline
+yl & Copier le caractère sous le curseur \\ \hline
+yh & Copier le caractère à gauche du curseur \\ \hline
+yy , :y ou :.y ou Y & Copier la ligne \\ \hline
+nyy ou :ny & Copier n ligne \\ \hline
+:\$y & Copier la dernière ligne \\ \hline
+:'ay & Copier la ligne avec le marquer a \\ \hline
+:n,my & Copier les lignes n à m \\ \hline
+:\%y & Copier toutes les lignes \\ \hline
+yw & Copier la fin du mot \\ \hline
+ye & Copier la fin du mot mais sans l'espace de fin\\ \hline
+yb & Copier le debut du mot\\ \hline
+yge & Copier le debut du mot avec l'espace de début\\ \hline
+y\$ & Copier la fin de la ligne \\ \hline
+y0 & Copier le début de la ligne \\ \hline
+yiw & Copier le mot (excluant l'espace de fin)\\ \hline
+yaw & Copier le mot (incluant l'espace de fin)\\ \hline
+yG & Copier la fin du fichier\\ \hline
+ygg & Copier le début du fichier\\ \hline
+y4\} & Copier 4 paragraphes\\ \hline
+\end{tabular}\\
+y3h :  copy three characters to the left
 
 \subsection{Changer la casse}
 \begin{tabular}{|p{3cm}| l|  }\hline
@@ -278,6 +305,28 @@ dgg & supprimer le début du fichier\\ \hline
 	:n	Go to next file
 	:p	Go to previous file
 
+\section{Macro}
+\begin{tabular}{|p{3cm}| l|  }\hline
+qa & Enregistre dans le registre a  \\ \hline
+@a & Rejoue la macro enregistrée dans le registre a \\ \hline
+@@ & Rejoue la dernière macro éxécutée \\ \hline
+10@a & Rejoue 10 fois la macro du registre a \\ \hline
+\end{tabular}\\
+
+
+\noindent
+Exemple : Pour créer une séquence de nombre\\
+\noindent
+Ecrire 1. sur la première ligne, sortir du mode insertion avec <Esc> puis taper qaYp<CTRL-a>q\\
+Explication :
+\begin{itemize}
+\renewcommand{\labelitemi}{$\bullet$}
+\item         qa : début de l'enregistrement.
+\item         Yp : copier cette ligne.
+\item         <CTRL-a> : incrémente le nombre.
+\item         q : arrête d'enregistrer.
+    \end{itemize}
+    Écrivez 100@@ ou 100@a pour créer une liste de nombre croissants jusqu'à 102.
 \section{Marqueurs}
 \begin{tabular}{|p{3cm}| l|  }
 	\hline
@@ -292,9 +341,9 @@ Les commandes suivantes se font en mode insertion\\
 
 \begin{tabular}{|p{3cm}| l|  }
     \hline
-CTRL-P & Recherche pour completion du mot dans le texte avant le curseur \\ \hline
-CTRL-N & Recherche pour completion dans mot le texte après le curseur \\ \hline 
-CTRL+x CTRL+l &	Recherche pour completion de la ligne \\ \hline
+CTRL-p & Recherche pour completion du mot dans le texte avant le curseur \\ \hline
+CTRL-n & Recherche pour completion dans mot le texte après le curseur \\ \hline 
+CTRL-x CTRL-l &	Recherche pour completion de la ligne \\ \hline
 \end{tabular}\\
 
 
