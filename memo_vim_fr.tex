@@ -6,9 +6,9 @@
 \usepackage[french]{babel}
 \usepackage[bookmarks=true]{hyperref}
 \usepackage{geometry}
-\geometry{hmargin=2.5cm,vmargin=2cm}
+\geometry{hmargin=2cm,vmargin=2cm}
 
-\title{Raccourcis Vim}
+\title{Mémo Vim}
 \author{Adrian Poiget}
 
 \begin{document}
@@ -53,7 +53,7 @@ gE & Aller à la fin du MOT précédent\\ \hline
 
 mot vs MOT : mot est une chaine de lettres, chiffres et underscores, MOT est une chaine de caractères sans espace\\
 
-\subsection{Déplacement dans le fichier}
+\subsection{Déplacement par ligne}
 \begin{tabular}{|p{3cm}| l| }
 \hline
 0 (zero) & Aller au début de la ligne \\ \hline
@@ -75,7 +75,7 @@ ngg & Aller à la ligne n\\ \hline
 \end{tabular}\\[0.5cm]
 
 
-
+\subsection{Déplacement dans le fichier}
 \begin{tabular}{|p{3cm}| l| }
 \hline
   50\% & Aller à 50\% du fichier.(milieu du fichier) \\ \hline
@@ -85,9 +85,11 @@ ngg & Aller à la ligne n\\ \hline
   :goto 25 & Aller au 25ème caractère depuis le début du fichier\\ \hline
 \end{tabular}\\
 
-
+\subsection{Déplacement par occurence}
 \begin{tabular}{|p{3cm}| l| }
 \hline
+* & Aller à la prochaine occurence du mot sous le curseur \\ \hline
+\# & Aller à la précédente occurence du mot sous le curseur \\ \hline
 fx & Déplace le curseur à la prochaine occurence du caractère x \\ \hline
 Fx & Déplace le curseur à la précédente occurence du caractère x \\ \hline
 tx & Déplace le curseur juste avant la prochaine occurence du caractère x \\ \hline
@@ -102,6 +104,8 @@ Exemple&	4fx recherche la 4ième occurrence de x.\\
 &2dfx supprime tout jusqu'à la 2eme prochaine occurence de x.\\
 \end{tabular}\\
 
+
+\subsection{Déplacement par écran}
 \begin{tabular}{|p{3cm}| l| }
 \hline
 CTRL-n & Descendre le curseur d'une ligne \\ \hline
@@ -118,6 +122,7 @@ H & Aller en haut de l'écran \\ \hline
 xH & Placer le curseur à x lignes du haut de l'écran \\ \hline
 M & Aller au milieu de l'écran\\ \hline
 \end{tabular}\\
+
 \subsection{Déplacement sur une ligne de "plusieurs lignes" visuellement }
 \begin{tabular}{|p{3cm}| l| }
 \hline
@@ -129,6 +134,36 @@ g\$ & Aller à la fin de la "ligne"\\ \hline
 g\^~ & Aller au premier caratère non vide de la ligne\\ \hline
 \end{tabular}\\
 
+\subsection{Déplacement dans du texte}
+\begin{tabular}{|p{3cm}| l| }\hline
+\{ & Aller au début du paragraphe \\ \hline
+\} & Aller au début du paragraphe suivant \\ \hline
+( & Aller au début de la phrase \\ \hline
+) & Aller à la phrase suivant \\ \hline
+\end{tabular}\\
+
+\subsection{Déplacement dans du code}
+\begin{tabular}{|p{3cm}| l| }
+\hline
+\% & Aller à la parenthèse, accolade, crochet correspondante : \{\}, [], (), or <> \\ \hline
+[i & sur une variable : Affiche la ligne contenant la définition de la variable  \\ \hline
+[d & sur une macro :  Affiche la définition de la macro \\ \hline
+[I & sur une variable : Affiche toutes les lignes contenant la variable \\ \hline
+gd & Aller à la définition de la variable locale (1ère occurrence de la variable dans la fonction) \\ \hline
+gD & Aller à la définition de la variable locale (1ère occurrence de la variable du fichier)  \\ \hline
+[( & Aller à précédente ( \\ \hline
+[) & Aller à prochaine ) \\ \hline
+[\{ & Aller à précédente \{ \\ \hline
+[\} & Aller à prochaine \} \\ \hline
+[[ & Aller au précédent bloc "primaire" defini par des accolades   \\ \hline
+]] & Aller au prochain bloc "primaire" defini par des accolade \\ \hline
+[<CTRL-i> & Aller à la première correspondance (1ère ligne du fichier contenant le terme) \\ \hline
+]<CTRL-i>& Aller à la prochaine correspondance (1ère ligne du fichier après le curseur contenant le terme)\\ \hline
+\end{tabular}\\
+
+CTRL-i est Tab, donc, [<Tab> va aussi à la première correspondance. 
+v\% Select between braces
+    
 \subsection{Sauts}
 Lorsquen vous vous déplacer dans le fichier grâce aux raccourcis précédents, vous pouvez revenir à la position d'avant avec les raccourcis suivavnts~: \\
 
@@ -250,7 +285,7 @@ y3h : copy three characters to the left
 
 
 \subsection{Copier}
-\begin{tabular}{|p{3cm}| l| }\hline
+\begin{tabular}{|p{4cm}| l| }\hline
 \multicolumn{2}{|l|}{\textbf{Mode normal }} \\ \hline
 p & Coller après le curseur \\ \hline
 P & Coller avant le curseur \\ \hline
@@ -273,13 +308,14 @@ vEu & Mettre le mot en minuscule\\ \hline
 vE$\sim$ & Inverser la casse du mot\\ \hline
 ggguG & Tout le fichier est mis en minuscule\\ \hline
 gggUG & Tout le fichier est mis en majuscule\\ \hline
+ggg$\sim$G & Inversse la casse de tout le fichier \\ \hline
 <selection>U & La sélection est mise en majuscule) \\ \hline
 <selection>u & La sélection est mise en minuscule \\ \hline
 g$\sim$motion & (It does not depend on tildeop) \\ \hline
 gUmotion & (All uppercase) \\ \hline
 gumotion & (All uppercase) \\ \hline
-gUw & Mettre le mot en majuscule\\ \hline
-guw & Mettre le mot en minuscule \\ \hline
+gUw & Mettre le mot en majuscule (de même avec W pour le MOT)\\ \hline
+guw & Mettre le mot en minuscule (de même avec W pour le MOT)\\ \hline
 g$\sim$w & Inverser la casse du mot \\ \hline
     :\%s/\textbackslash{}\textless{}./\textbackslash{}u\&/g & Mettre la 1ère lettre de chaque mot en majuscule \\ \hline
     :\%s/\textbackslash{}\textless{}./\textbackslash{}l\&/g & Mettre la 1ère lettre de chaque mot en minuscule \\ \hline
@@ -290,6 +326,18 @@ g$\sim$w & Inverser la casse du mot \\ \hline
 :set smartcase Ignore case in searches excepted if an uppercase letter is used
 
 \section{Ouvrir, sauvegarder et quitter}
+\subsection{Ouvrir depuis la ligne de commande}
+\begin{tabular}{|p{4cm}| l| }
+\hline
+vim -R  fichier & Ouvre le fichier en lecture seule \\ \hline
+vim +143 fichier & Ouvre le fichier et positionne le curseur à la ligne 143 \\ \hline
+vim +/recherche fichier & Ouvre le fichier et positionne le curseur à la première correspondance du terme recherché depuis le début du fichier   \\ \hline
+vim +?recherche fichier & Ouvre le fichier et positionne le curseur à la première correspondance du terme recherché depuis la fin du fichier \\ \hline
+vim + fichier & Ouvre le fichier et positionne le curseur à la fin du fichier  \\ \hline
+\end{tabular}\\
+
+
+\subsection{Depuis Vim}
 \begin{tabular}{|p{3cm}| l| }
 \hline
 ZZ or :wq or :x & Sauvegarder le fichier et quitter\\ \hline
@@ -303,7 +351,7 @@ ZQ or :q! & Quitter sans sauver\\ \hline
 gf & Ouvre le fichier dont le nom est le mot sous le curseur\\ \hline
 :Sex & Ouvrir un exploreur de fichier dans un nouveau split\\ \hline
 :Ex & Ouvrir un exploreur de fichier\\ \hline
-:browse e & Ouvre un exploreur de fichier graphique\\ \hline
+:browse e & Ouvre un exploreur de fichier graphique \\ \hline
 \end{tabular}\\
 
 :ls List buffers
@@ -367,7 +415,7 @@ CTRL-x CTRL-l &	Recherche pour completion de la ligne \\ \hline
 
 \section{Les splits}
 \subsection{Ouverture}
-\begin{tabular}{|p{3cm}| l| }\hline
+\begin{tabular}{|p{4cm}| l| }\hline
 \multicolumn{2}{|l|}{\textbf{Lors du lancement de vim }} \\ \hline
     vim -o foo bar & Ouvre foo et bar en split\\ \hline
     vim -O foo bar & Ouvre foo et bar en vsplit\\ \hline
