@@ -123,6 +123,15 @@ xH & Placer le curseur à x lignes du haut de l'écran \\ \hline
 M & Aller au milieu de l'écran\\ \hline
 \end{tabular}\\
 
+z<Enter> or zt Redraw the screen with the current line under the cursor at the top of the screen.
+z.  or zz Redraw the screen with the current line under the cursor at the middle of the screen.
+z- or zb Redraw the screen with the current line under the cursor at the bottom of the screen.
+
+z<Enter> (screen line on the top)
+88z<Enter> positions line 88 at the top.
+z- (scrolls line to the end of the screen)
+z. (Center of the screen)
+
 \subsection{Déplacement sur une ligne de "plusieurs lignes" visuellement }
 \begin{tabular}{|p{3cm}| l| }
 \hline
@@ -188,6 +197,35 @@ CTRL-i ou tab & Aller à l'emplacement suivant\\ \hline
 Aller à la prochaine occurence de la chaine dans la même direction en tapant n.\\
 Aller à la prochaine occurence de la chaine dans la même direction en tapant N
 
+Les expressions regulières peuvent être utiliser pour rechercher
+. (dot)	un caractère sauf "aller à la ligne"
+*	zero ou plusieurs occurences 
+[...]	n'importe quel caractère de l'ensemble
+[\^...]	n'importe quel caractère qui n'est pas dans l'ensemble
+\^	Anchor - début de la ligne
+\$	Anchor - fin de la ligne
+<	Anchor - début du mot
+>	Anchor - fin du mot
+
+/jo[ha]n 	Search john or joan
+/\textbackslash{}< the 	Search a word beginning by " the"
+/the\textbackslash{}> 		Search a word ending by "the"
+/\textbackslash{}< the\textbackslash{}> 	Search the
+/\textbackslash{}< Š.\textbackslash{}> 	Search all words of 4 letters ???
+/\textbackslash{}/ 	Search fred but not alfred or frederick ????
+/fred\textbackslash{}|joe 	Search fred or joe
+%/\<\d\d\d\d\> 	Search exactly 4 digits
+%/^\n\{3} 	Find 3 empty lines
+:bufdo /searchstr/ 	Search in all open files
+
+
+:set ic 		pour ignorer la casse
+:set hlsearch	pour surligner le mot correspondant
+:set incsearch	pour commencer a chercher avant d'voir taper entrée
+:set hls is
+ :nohlsearch
+ 
+ 
 \section{Information}
 Voici maintenant quelques commandes pour obtenir des informations sur la ligne ou le caractère\\
 
@@ -251,8 +289,15 @@ diw & supprimer le mot (excluant l'espace de fin)\\ \hline
 daw & supprimer le mot (incluant l'espace de fin)\\ \hline
 dG & supprimer la fin du fichier\\ \hline
 dgg & supprimer le début du fichier\\ \hline
+:\$d & Supprimer la dernière ligne \\ \hline
+:'ad & Suppriemr la ligne avec le marqueur a \\ \hline
+:n,md & Supprimer les lignes n à m \\ \hline
+:\%d & Supprimer toutes les lignes  \\ \hline
 \end{tabular}\\
 
+
+d2l supprimer 2 caractères à la droite du curseur\\
+d4\} supprimer 4 paragraphes\\
 
 \subsection{Copier}
 Pareil que pour les commandes pour supprimer en remplaçant d par y\\
@@ -284,7 +329,7 @@ y4\} & Copier 4 paragraphes\\ \hline
 y3h : copy three characters to the left
 
 
-\subsection{Copier}
+\subsection{Coller}
 \begin{tabular}{|p{4cm}| l| }\hline
 \multicolumn{2}{|l|}{\textbf{Mode normal }} \\ \hline
 p & Coller après le curseur \\ \hline
@@ -325,6 +370,42 @@ g$\sim$w & Inverser la casse du mot \\ \hline
 :set ignorecase Ignore case in searches\\
 :set smartcase Ignore case in searches excepted if an uppercase letter is used
 
+\begin{tabular}{|p{4cm}| l| }\hline
+	u & Annulation \\ \hline
+	U & Annulation sur la ligne actuelle \\ \hline
+	CTRL-r & Restauration \\ \hline
+    .  & Répéter la dernière commande \\ \hline
+\end{tabular}\\
+
+\subsection{Substitution}
+ :s/regex/Substitute/flags
+flag g (global) replace all matches
+c ask confirmation
+i insensitive case
+number , replace the number th occurrence
+no flag replace only the first occurrence
+
+:s/foo/bar/g all occurence on the current line.
+:$s/foo/bar/g the last line.
+:\%s/foo/bar/g Change each 'foo' to 'bar' in all lines.
+:5,12s/foo/bar/g Change each 'foo' to 'bar' for all lines from line 5 to line 12 inclusive.
+:'a,'bs/foo/bar/g Change each 'foo' to 'bar' for all lines from mark a to mark b inclusive.
+:.,\$s/foo/bar/g Change each 'foo' to 'bar' for all lines from the current line (.) to the last line ($) inclusive.
+:.,+2s/foo/bar/g Change each 'foo' to 'bar' for the current line (.) and the two next lines (+2).
+:g/\^baz/s/foo/bar/g Change each 'foo' to 'bar' in each line starting with 'baz'.
+if no 'g' at the end , replace only the first or the 'n'th occurence
+:g/regex1/s/regex2/string/g Replace all lines matching a regular expression from the set that matches another regular expression
+For example, toreplace all occurrences of York with Orleans on every linethat matches New York, type :g/New York/s/York/Orleans/g
+:\%s/\^/hello/g 	Replace the begining of each line by hello
+:\%s/\$/Harry/g 	Replace the end of each line by Harry
+:\%s/onward/forward/gi 	Replace onward by forward, case unsensitive
+:\%s/ *\$//g 	Delete all white spaces
+:g/string/d 	Delete all lines containing string
+:v/string/d 	Delete all lines containing which didn t contain string
+:%s#<[^>]\+>##g 	Delete HTML tags but keeps text
+:%s/^\(.*\)\n\1$/\1/ 	Delete lines which appears twice
+
+
 \section{Ouvrir, sauvegarder et quitter}
 \subsection{Ouvrir depuis la ligne de commande}
 \begin{tabular}{|p{4cm}| l| }
@@ -352,6 +433,7 @@ gf & Ouvre le fichier dont le nom est le mot sous le curseur\\ \hline
 :Sex & Ouvrir un exploreur de fichier dans un nouveau split\\ \hline
 :Ex & Ouvrir un exploreur de fichier\\ \hline
 :browse e & Ouvre un exploreur de fichier graphique \\ \hline
+:e! ou :edit! & Remet la dernière version sauvegarder du fichier \\ \hline
 \end{tabular}\\
 
 :ls List buffers
@@ -477,16 +559,36 @@ V{deplacement}= & pour réindenter la sélection\\ \hline
 G=gg   & auto (re)indenter le fichier entier \\ \hline
 \end{tabular}\\
 
+\section{Insertion de fichier}
+On va utiliser la commande \verb?:read? pour insérer dans notre fichier un autre fichier ou le résultat d'une commande\\
 
+
+\begin{tabular}{|p{3cm}| l| }
+\hline
+:r foo.txt & Insérer le fichier foo.txt sous le curseur \\ \hline
+:0r foo.txt & Insérer le fichier foo.txt avant la première ligne \\ \hline
+:r !ls & Insérer le résultat de la commande \verb?ls?  sous le curseur \\ \hline
+:nr !ls & Insérer le résultat de la commande \verb?ls? à la ligne n \\ \hline
+:'ar !ls & Insérer le résultat de la commande \verb?ls? à la ligne avec le marqueur a \\ \hline
+:\$r !pwd & Insérer le résultat de la commande \verb?ls? à la fin du fichier  \\ \hline
+:\%!cmd & Replacer tout le fichier par le résultat de la commande \verb?cmd? \\ \hline
+:n,m!cmd & Replacer la ligne n à m par le résultat de la commande \verb?cmd? \\ \hline
+:n!cmd & Replacer la ligne n par le résultat de la commande \verb?cmd? \\ \hline
+:.!cmd & Replacer la ligne actuelle par le résultat de la commande \verb?cmd?\\ \hline
+:'a !cmd & Replacer la ligne avec le marqueur a par le résultat de la commande \verb?cmd? \\ \hline
+\end{tabular}\\
 
 
 \section{Divers}
 \begin{tabular}{|p{4cm}| l| }
 \hline
 :ab test test@foo.info & l'abbréviaton test sera remplacé par test@foo.info \\ \hline
+:!cmd ou !!cmd & Lancer la commande externe \verb?cmd?  \\ \hline
     CTRL-a &sur un nombre Ajoute 1 au nombre \\ \hline
     CTRL-x &sur un nombre Enleve 1 au nombre \\ \hline
     ggg?G   & rot13 le fichier entier \\ \hline
+    ggVGg? 	& Changer le texte to Rot13 \\ \hline
+    :w !sudo tee \% &  modifier un fichier système lorsqu'il a été ouvert sans être root \\ \hline
 \end{tabular}\\
 
 \end{document}
